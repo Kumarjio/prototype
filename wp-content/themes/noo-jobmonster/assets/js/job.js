@@ -411,6 +411,7 @@
 			required: nooJobL10n.validate_messages.required,
 			remote: nooJobL10n.validate_messages.remote,
 			email: nooJobL10n.validate_messages.email,
+			workMail: nooJobL10n.validate_messages.workMail,
 			url: nooJobL10n.validate_messages.url,
 			date: nooJobL10n.validate_messages.date,
 			dateISO: nooJobL10n.validate_messages.dateISO,
@@ -434,13 +435,32 @@
 			param = typeof param === "string" ? param.replace(/,/g, "|") : "pdf|doc|docx";
 			return this.optional(element) || value.match(new RegExp(".(" + param + ")$", "i"));
 		}, nooJobL10n.validate_messages.extension);
-		
+
+        $.validator.addMethod("workMail", function(value, element, param) {
+            console.log("=======000000=======");
+            var pattern = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            var domains= ["qq.com","163.com","vip.163.com","263.net","yeah.net","sohu.com","sina.cn","sina.com","eyou.com","gmail.com","hotmail.com"];
+            console.log("======111111=======");
+            if(pattern.test(value)) {
+                var domain = value.substring(value.indexOf("@")+1);
+                for(var i = 0; i< domains.length; i++) {
+                    if(domain == domains[i]) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }, nooJobL10n.validate_messages.workMail);
+
 		$.validator.addClassRules({
 			'jform-validate':{
 				required : true
 			},
 			'jform-validate-email':{
 				email: true
+			},
+			'jform-validate-workMail':{
+				workMail: true
 			},
 			'jform-chosen-validate':{
 				required : true
