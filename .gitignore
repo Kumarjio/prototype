@@ -3,3 +3,11 @@
 
 # Temporary files
 *.bak
+
+# IDEA
+.idea/
+out/
+generated/
+*.iml
+*.ipr
+*.iws
