@@ -41,7 +41,7 @@ if( $allow_register != 'none' ) :
 		<div class="form-group row required-field">
 			<label for="<?php echo $prefix; ?>_user_email" class="col-sm-3 control-label"><?php _e('Email','noo')?></label>
 			<div class="col-sm-9">
-				<input type="email" class="user_email form-control jform-validate-workMail" id="<?php echo $prefix; ?>_user_email"  name="user_email" required placeholder="<?php echo esc_attr__('Email','noo')?>">
+				<input type="email" class="user_email form-control jform-validate jform-validate-workMail" id="<?php echo $prefix; ?>_user_email"  name="user_email" required placeholder="<?php echo esc_attr__('Email','noo')?>">
 			</div>
 		</div>
 		<div class="form-group row required-field">
