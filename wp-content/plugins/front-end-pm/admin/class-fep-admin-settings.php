@@ -29,6 +29,7 @@ class Fep_Admin_Settings
 		add_action('update_option_FEP_admin_options', array($this, 'after_option_save'), 99 );
 		
 		add_action('fep_action_after_admin_options_save', array($this, 'recalculate_user_message_count'), 10, 2 );
+		add_action('publish_page', array($this, 'set_page_id'), 10, 2 );
     }
 
     function addAdminPage()
@@ -1021,9 +1022,9 @@ function fep_admin_sidebar()
 		return;
 		
 		?><div class="notice notice-info inline fep-review-notice">
-			<p><?php printf(__( 'like %s plugin? Please consider review in WordPress.org and give 5&#9733; rating.', 'front-end-pm' ), 'Front End PM'); ?></p>
+			<p><?php printf(__( 'Like %s plugin? Please consider review in WordPress.org and give 5&#9733; rating.', 'front-end-pm' ), 'Front End PM'); ?></p>
 			<p>
-				<a href="https://wordpress.org/support/plugin/front-end-pm/reviews/?filter=5#new-post" class="button button-secondary fep-review-notice-dismiss" data-fep_click="sure" target="_blank" rel="noopener"><?php _e( 'Sure, deserve it', 'front-end-pm' ); ?></a>
+				<a href="https://wordpress.org/support/plugin/front-end-pm/reviews/?filter=5#new-post" class="button button-primary fep-review-notice-dismiss" data-fep_click="sure" target="_blank" rel="noopener"><?php _e( 'Sure, deserve it', 'front-end-pm' ); ?></a>
 				<button class="button-secondary fep-review-notice-dismiss" data-fep_click="later"><?php _e( 'Maybe later', 'front-end-pm' ); ?></button>
 				<button class="button-secondary fep-review-notice-dismiss" data-fep_click="did"><?php _e( 'Already did', 'front-end-pm' ); ?></button>
 			</p>
@@ -1031,17 +1032,23 @@ function fep_admin_sidebar()
 		<?php
 	}
 	
-function add_settings_link( $links ) {
-	//add settings link in plugins page
-	$settings_link = '<a href="' . admin_url( 'edit.php?post_type=fep_message&page=fep_settings' ) . '">' .__( 'Settings', 'front-end-pm' ) . '</a>';
-	array_unshift( $links, $settings_link );
-	
-	return $links;
-}
+	function add_settings_link( $links ) {
+		//add settings link in plugins page
+		$settings_link = '<a href="' . admin_url( 'edit.php?post_type=fep_message&page=fep_settings' ) . '">' .__( 'Settings', 'front-end-pm' ) . '</a>';
+		array_unshift( $links, $settings_link );
+		
+		return $links;
+	}
 
-function extensions_page(){
-	include( FEP_PLUGIN_DIR. 'admin/extensions.php' );
-}
+	function extensions_page(){
+		include( FEP_PLUGIN_DIR. 'admin/extensions.php' );
+	}
+
+	function set_page_id( $id, $post ){
+		if( ! fep_get_option( 'page_id' ) && false !== strpos( $post->post_content, '[front-end-pm' ) ){
+			fep_update_option( 'page_id', $id );
+		}
+	}
 
   } //END CLASS
 

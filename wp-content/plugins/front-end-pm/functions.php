@@ -322,6 +322,7 @@ function fep_enqueue_scripts()
 				'token' => wp_create_nonce('fep-block-unblock-script')
 			) 
 		);
+	wp_register_script( 'fep-cb-check-uncheck-all', FEP_PLUGIN_URL . 'assets/js/check-uncheck-all.js', array( 'jquery' ), '7.5', true );
     }
 
 function fep_page_id() {
@@ -2013,5 +2014,11 @@ function fep_pre_get_document_title( $title ){
 		}
 	}
 	return $title;
+}
+
+function fep_is_func_disabled( $function ) {
+	$disabled = explode( ',',  ini_get( 'disable_functions' ) );
+
+	return in_array( $function, $disabled );
 }
 
