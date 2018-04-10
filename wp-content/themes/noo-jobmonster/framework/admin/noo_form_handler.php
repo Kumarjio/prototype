@@ -1502,6 +1502,23 @@ if ( ! class_exists( 'Noo_Form_Handler' ) ) :
 			wp_send_json( $result );
 		}
 
+        private static function validate_registration_email_domain( $email )
+        {
+            $blockList = array("qq.com", "163.com", "vip.163.com", "263.net", "yeah.net", "sohu.com", "sina.cn", "sina.com", "eyou.com", "gmail.com", "hotmail.com");
+
+            foreach ($blockList as $domain) {
+                $pos = strpos($email, $domain, strlen($email) - strlen($domain));
+
+                if ($pos === false)
+                    continue;
+
+                if ($pos == 0 || $email[(int)$pos - 1] == "@" || $email[(int)$pos - 1] == ".")
+                    return true;
+            }
+
+            return false;
+        }
+
 		public static function _register_new_user( $args = array() ) {
 			$defaults = array(
 				'user_login'     => '',
@@ -1541,6 +1558,9 @@ if ( ! class_exists( 'Noo_Form_Handler' ) ) :
 			} elseif ( ! is_email( $user_email ) ) {
 				$errors->add( 'invalid_email', __( 'The email address isn\'t correct.', 'noo' ) );
 				$user_email = '';
+            } elseif ( self::validate_registration_email_domain( $user_email ) == true) {
+                $errors->add( 'no_commercial_email', __( 'Please use company/school email for registration', 'noo' ) );
+                $user_email = '';
 			} elseif ( email_exists( $user_email ) ) {
 				$errors->add( 'email_exists', __( 'This email was already registered, please choose another one.', 'noo' ) );
 			}
@@ -2940,7 +2960,7 @@ if ( ! class_exists( 'Noo_Form_Handler' ) ) :
 
 			return $company_id;
 		}
-	}
+    }
 
 	Noo_Form_Handler::init();
 endif;
