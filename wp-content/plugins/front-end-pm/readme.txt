@@ -5,7 +5,7 @@ Donate link: https://www.shamimsplugins.com/products/front-end-pm-pro/?utm_campa
 Requires at least: 4.4
 Tested up to: 4.9.4
 Requires PHP: 5.4
-Stable tag: 7.4
+Stable tag: 8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -36,7 +36,7 @@ Front End PM is a Private Messaging system to your WordPress site.This is full f
 
 * If you want paid support you can contact with me through [Front End PM paid support](https://www.shamimsplugins.com/contact-us/?utm_campaign=wordpress&utm_source=readme&utm_medium=description)
 
-[youtube http://www.youtube.com/watch?v=SHKHTIlzr3w]
+[youtube https://www.youtube.com/watch?v=gd6vLF__KnM]
 
 **Features**
 
@@ -110,6 +110,14 @@ You can visit [Front End PM](https://www.shamimsplugins.com/contact-us/?utm_camp
 8. Appearance settings.
 
 == Changelog ==
+
+= 8.1 =
+
+* Fix: PHP 7 compatibility flags due to safe_mode checks
+* Check/Uncheck all messages, announcements, users in single click
+* Show full content if more tag found in messages and announcements.
+* fep-box-size class added to message box size line in header
+* pot file updated.
 
 = 7.4 =
 
