@@ -2116,11 +2116,11 @@ class WP_Query {
 		}
 		$where .= $search . $whichauthor . $whichmimetype;
 
-		if ( ! empty( $this->meta_query->queries ) ) {
-			$clauses = $this->meta_query->get_sql( 'post', $wpdb->posts, 'ID', $this );
-			$join   .= $clauses['join'];
-			$where  .= $clauses['where'];
-		}
+//		if ( ! empty( $this->meta_query->queries ) ) {
+//			$clauses = $this->meta_query->get_sql( 'post', $wpdb->posts, 'ID', $this );
+//			$join   .= $clauses['join'];
+//			$where  .= $clauses['where'];
+//		}
 
 		$rand = ( isset( $q['orderby'] ) && 'rand' === $q['orderby'] );
 		if ( ! isset( $q['order'] ) ) {
