@@ -1,0 +1,12 @@
+$MTCloud = new MTCloud();
+//参数：课程名称，主播帐号，课程计划开始时间，课程计划结束时间，主播昵称，课程简介
+$res = $MTCloud->courseAdd('课程1','1380013800','2016-07-07 11:30','2016-07-07 15:00', 'wesin','课程测试');
+var_dump($res);
+$course_id = $res['data']['course_id'];
+$MTCloud = new MTCloud();
+//参数：课程ID
+$res = $MTCloud->courseLaunch(10621);
+var_dump($res);
+$downloadUrl = $res['data']['download'];    //直播器下载地址
+$launchUrl = $res['data']['url'];            //启动页地址
+$launchProtocol = $res['data']['protocol']; //启动协议
